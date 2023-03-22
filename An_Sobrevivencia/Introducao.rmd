@@ -1,0 +1,45 @@
+---
+title: "Introdução"
+author: "Caio Gomes Alves"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+# Introdução
+
+Seja $e$y = \text{tempo até o evento de interesse}$, chamamos esse tempo $$y$ de **tempo de falha**. A resposta para esses eventos é intrinsicamente longitudinal, sendo obtidas pot estudos observacionais e experimentais, de forma retrospectiva ou prospectiva.
+
+Exemplos de estudos observacionais são:
+
+* Estudos descritivos;
+* Estudos caso-controle;
+* Estudos de coorte.
+
+Exemplos de estudos experimentais são principalmente:
+
+*Estudos clínicos.
+
+Num estudo de coorte, os grupos exposto e não-exposto ao fator de interesse são acompanhados no tempo, registrando-se a ocorrência do evento de interesse. Por exemplo, dois indivíduos são expostos ao cigarro (usuário x não-usuário), e são acompanhados até a ocorrência de câncer.
+
+Denominações usuais para estudos de coorte são:
+* Estudos longitudinais ou de seguimento (ênfase no acompanhamento ao longo do tempo);
+* Estudos prospectivos (ênfase na direção do acompanhamento);
+* Estudos de incidência (atentando para a proporção de novos casos no período de seguimento).
+
+Em relação à forma de coleta das informações, podemos classificá-las em:
+
+* Coorte *contemporânea* ou *prospectiva*: indivíduos escolhidos no presente e desfecho registrado em acompanhamento futuro;
+
+Um estudo *clínico aleatorizado* é considerado o padrão-ouro para testar a eficácia de uma intervenção. É um estudo prospectivo no qual exite a intervenção direta do pesquisador que aloca, de forma aleatória, o tratamento ao paciente.
+
+Tipos de censura:
+
+* Censura do tipo I: Ocorre em estudos em que, ao serem finalizados após um tempo pré-estabelicido, alguns indivíduos ainda não apresentaram o evento de interesse;
+* Censura do tipo II: ocorre em estudos que são encerrados após a observação de um número pré-estabelicido de falhas;
+* Censura aleatória: ocorre com frequência na área médica. Neste caso, o indivíduo saí do estudo sem a ocorrência do evento de interesse.
+
+Seja e$T$ uma v.a. que representa o tempo de falha e $$C$ uma outra v.a. independente de $$T$ que representa o tempo de censura. O que se observa é:
+
+$$
+t = min(T,C)
+$$
