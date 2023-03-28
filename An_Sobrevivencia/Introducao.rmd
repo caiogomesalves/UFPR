@@ -2,7 +2,7 @@
 title: "Introdução"
 author: "Caio Gomes Alves"
 date: "`r Sys.Date()`"
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup, include = F}
@@ -12,7 +12,7 @@ library(highcharter)
 
 # Introdução
 
-Seja $e$y = \text{tempo até o evento de interesse}$, chamamos esse tempo $$y$ de **tempo de falha**. A resposta para esses eventos é intrinsicamente longitudinal, sendo obtidas pot estudos observacionais e experimentais, de forma retrospectiva ou prospectiva.
+Seja $y = \text{tempo até o evento de interesse}$, chamamos esse tempo $y$ de **tempo de falha**. A resposta para esses eventos é intrinsicamente longitudinal, sendo obtidas pot estudos observacionais e experimentais, de forma retrospectiva ou prospectiva.
 
 Exemplos de estudos observacionais são:
 
@@ -22,7 +22,7 @@ Exemplos de estudos observacionais são:
 
 Exemplos de estudos experimentais são principalmente:
 
-*Estudos clínicos.
+* Estudos clínicos.
 
 Num estudo de coorte, os grupos exposto e não-exposto ao fator de interesse são acompanhados no tempo, registrando-se a ocorrência do evento de interesse. Por exemplo, dois indivíduos são expostos ao cigarro (usuário x não-usuário), e são acompanhados até a ocorrência de câncer.
 
@@ -43,22 +43,108 @@ Tipos de censura:
 * Censura do tipo II: ocorre em estudos que são encerrados após a observação de um número pré-estabelicido de falhas;
 * Censura aleatória: ocorre com frequência na área médica. Neste caso, o indivíduo saí do estudo sem a ocorrência do evento de interesse.
 
-Seja e$T$ uma v.a. que representa o tempo de falha e $$C$ uma outra v.a. independente de $$T$ que representa o tempo de censura. O que se observa é:
+Seja $T$ uma v.a. que representa o tempo de falha e $C$ uma outra v.a. independente de $T$ que representa o tempo de censura. O que se observa é:
 
 $$
 t = min(T,C)
 $$
 
-```{r plot_1, echo = F}
-plot(c(1, 2, 3) ~ c(2, 3, 4))
-```
+e:
 
-Agora voltamos para rmd.
+$$
+\delta = 1, \text{se} T \le C
+$$
 
-```{r avaliar_dados}
-iris |>
-    hchart(
-        type = "scatter",
-        hcaes(x = Sepal.Length, y = Sepal.Width)
-    )
-```
+$$
+\delta = 0, \text{se} T > C.
+$$
+
+Ou seja:
+
+$$
+\delta_i = I(T_i \le C_i)
+$$
+
+$$
+T \sim f_T(t|\theta_T)
+$$
+
+$$
+C \sim f_C(c|\theta_C)
+$$
+
+Suponha que os pares $(T_i,C_i), i = 1,2,\ldots,n$ formam uma amostra aleatória de $n$ indivíduos. Quando $C_1 = C$, uma constante fixada, obtém-se a censura do tipo I.
+
+A função taxa de falha permite descrever a taxa de falha instantânea no tempo $t$ condicional à sobrevivência até o tempo $t$. É definida como:
+
+$$
+\lambda(t)=\lim_{\Delta t \to 0}\frac{P(t \le T < t+\Delta t|T \ge t)}{\Delta t}
+$$
+
+A função de taxa de falha acumulada fornece a taxa de falha acumulada do indivíduo, sendo definida como:
+
+$$
+\Lambda(u) = \int_{0}^{t}\lambda(u)du
+$$
+
+O tempo de vida médio é dado por:
+
+$$
+t_m = \mathbb{E}(T)=\int_{0}^{\infty} S(t)dt
+$$
+
+A vida média residual mede, para indivíduos com tempo $t$, o tempo médio restante de vida e é dada por:
+
+$$
+vmr(t) = \frac{\int_{t}^{\infty}S(u)du}{S(t)}
+$$
+
+Em que $f(\cdot)$ é a densidade de $T$. Note que $vmr(0) = t_m$
+
+Temos as seguintes relações:
+
+$$
+\lambda(t) = \frac{f(t)}{S(t)}=-\frac{\delta}{\delta t}(\log S(t))
+$$
+
+$$
+\Lambda(t)=\int_0^t \lambda(u)du = -log(S(t))
+$$
+
+$$
+S(t)=\exp{\{-\Lambda(t)\}}=\exp{\{-\int_0^t \lambda(u)du\}}
+$$
+
+$$
+S(t)=\frac{vmr(0)}{vmr(t)}\exp{\{-\int_0^t \frac{du}{vmr(u)}\}}
+$$
+
+$$
+\lambda(t)=(\frac{\delta vmr(t)}{\delta t}+1)/vmr(t)
+$$
+
+
+## Estimador de Kaplan-Meier
+
+O estimador de Kaplan-Meier é uma adaptação da função de sobrevivência empírica que, na ausência de censuras, é definida como:
+
+$$
+\hat{S}(t)=\frac{\text{nº de observações que não falharam até o tempo}t}{\text{nº de observações no estudo}}
+$$
+
+* $\hat{S}(t)$ é uma função escada com degraus nos tempos observados de falha de tamanho $\frac{1}{n}$, em que $n$ é o tamanho da amostra;
+* Se existirem empates no tempo $t$, o tamanho do degrau fica multiplicado pelo número de empates;
+* O EKM considera tanto intervalos de tempo quantos forem o número de falhas distrintas.
+
+Construção do EKM em dados que envolvem censuras:
+
+* Ordenar os tempos distintos de falha: $t_1 < t_2< \ldots < t_k$;
+* Obter $d_j$: número de falhas no tempo $t_j$;
+* Obter $n_j$: número de observações sob risco (não falhou e não foi censurado) até o tempo $t_j$ (exclusive);
+* Obter $q_j = \frac{d_j}{n_j}$;
+* a sobrevivência em $t_j$ é estimada por:
+$$
+\hat{S}(t) = \prod_{i \le j}(1-\frac{d_i}{n_i})
+$$
+
+Principais propriedades
