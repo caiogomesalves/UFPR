@@ -144,7 +144,128 @@ Construção do EKM em dados que envolvem censuras:
 * Obter $q_j = \frac{d_j}{n_j}$;
 * a sobrevivência em $t_j$ é estimada por:
 $$
-\hat{S}(t) = \prod_{i \le j}(1-\frac{d_i}{n_i})
+\hat{S}(t) = (1-q_{1})(1-q_{2})\cdots(1-q_j) = \prod_{i \le j}(1-\frac{d_i}{n_i})
 $$
 
-Principais propriedades
+O EKM é então definido por:
+
+$$
+\hat{S}(t)\hat{S}(t)=\prod_{j:t_j < t}(\frac{n_j-d_j}{n_j})=\prod_{j:t_j < t}(1 - \frac{d_j}{n_j})
+$$
+
+Principais propriedades:
+
+* É não-viciado para amostras grandes;
+* É fracamente consistente;
+* Converge assintoticamente para um processo Gaussiano;
+* É estimador de máxima verossimilhança de $S(t)$.
+
+A variância assintótica do EKM é estimada pela fórmula de Greenwood:
+
+$$
+\hat{Var}(\hat{S}(t))=\hat{S}(t)^2 \sum_{j:t_j<t}(\frac{d_j}{n_j(n_j-d_j)})
+$$
+
+Como $\hat{S}(t)$, para $t$ fixo, tem distribuição assintótica Normal, segue que um intervalo de confiança aproximado para $S(t)$ é dado por:
+
+$$
+\hat{S}(t) \pm z_{\alpha / 2}\sqrt{\hat{Var}(\hat{S}(t))}
+$$
+
+Existem correções para valores extremos de $t$, em que o intervalo acima pode apresentar valores menores que zero e maiores que 1. Uma solução é considerar alguma transformação para $S(t)$, por exemplo, para $\hat{U}(t)=\log{[-\log{\hat{S}(t)}]}$, temos:
+
+$$
+\hat{Var}(\hat{U}(t)) = \frac{\sum_{j:t_j<t}\frac{d_j}{n_j(n_j-d_j)}}{[\sum_{j:t_j<t}\log{(\frac{n_j-n_d}{n_j})}]^2}
+$$
+
+E o intervalo de confiança será dado por:
+
+$$
+[\hat{S}(t)]^{\exp{\{\pm z_{\alpha/2}\sqrt{\hat{Var}(\hat{U}(t))}\}}}
+$$
+
+O estimador de Nelson-Aalen se baseia na função de sobrevivência:
+
+$$
+S(t)=\exp{\{\Lambda(t)\}}
+$$
+
+Um estimador para $\Lambda(t)$ é:
+
+$$
+\tilde{\Lambda}(t) = \sum_{j:t_k<t}(\frac{d_j}{n_j})
+$$
+
+O estimador de Nelson-Aalen para $S(t)$ é dado por:
+
+$$
+\tilde{S}(t)=\exp{\{-\tilde{\Lambda}(t)\}}
+$$
+
+Com variância assintótica estimada:
+
+$$
+\hat{Var}(\tilde{\Lambda}(t))=[\tilde{S}(t)]^{2} \sum_{j:t_k<t}(\frac{d_j}{n_j^{2}})
+$$
+
+## No R: Dados de Hepatite:
+
+```{r, echo=T}
+# Pacotes utilizados:
+library(survival)
+library(survminer)
+
+# Dados dos tempos de falha:
+tempos <- c(1,2,3,3,3,5,5,16,16,16,16,16,16,16,16,1,1,1,1,4,5,7,8,10,10,12,16,16,16)
+
+# Indicadora de censura:
+cens <- c(0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,1,1,1,0,0,0,0,0)
+
+# Divisão dos grupos:
+grupos <- as.factor(c(rep("Controle", 15),rep("Esteroide", 14)))
+
+# Dados completos:
+dados <- data.frame(tempos, cens, grupos)
+
+# Gráfico da curva de sobrevivência:
+ekm <- survfit(Surv(tempos, cens) ~ grupos, data = dados)
+ggsurvplot(ekm)
+
+# Sumários:
+summary(ekm0 <- survfit(Surv(tempos, cens) ~ grupos, conf.type = "plain",data = dados))
+
+sob.NA <- survfit(coxph(Surv(tempos, cens) ~ grupos,data = subset(dados, grupos == "Esteroide"),method = "breslow"))
+summary(sob.NA)
+```
+
+## Estimação de Quantidades de Interesse:
+
+* Probabilidade de sobrevivência
+  * Estimador de Kaplan-Meier ou de Nelson-Aalen;
+  * Interpolação pode ser útil;
+  * Variância estimada pela fórmula de Greenwood. Transformações podem ser úteis.
+
+* Percentis
+  * Utilizar a inversa do estimador de Kaplan-Meier ou de Nelson-Aalen;
+  * Interpolação pode ser útil;
+  * Variância difícil de ser estimada.
+
+A variância do estimador de percentis ($\hat{t}_p_$) é dada por:
+
+$$
+Var(\hat{t}_p)=\frac{\hat{Var}(\hat{S}(\hat{t}_p_))}{[f(\hat{t}_p)]^2}
+$$
+
+Desejamos estimar:
+
+$$
+t_m = \mathbb{E}(T) = \int_0^{\infty}S(t)dt
+$$
+
+Uma estimativa paratmé substituir $S(t)$ por $\hat{S}(t)$. A integral se transformaem uma soma de áreas de retângulos, isto é:
+
+$$
+\hat{t}_m=t_1 + \sum_{i = 1}^{k-1}\hat{S}(t_j)(t_{j+1}-t_j)
+$$
+
+Em que $t_1<t_2<\cdots<t_k$ são os $k$ tempos de falha distintos e ordenados.
