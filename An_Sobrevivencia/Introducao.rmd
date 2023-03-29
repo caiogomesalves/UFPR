@@ -250,10 +250,10 @@ summary(sob.NA)
   * Interpolação pode ser útil;
   * Variância difícil de ser estimada.
 
-A variância do estimador de percentis ($\hat{t}_p_$) é dada por:
+A variância do estimador de percentis ($\hat{t}_p$) é dada por:
 
 $$
-Var(\hat{t}_p)=\frac{\hat{Var}(\hat{S}(\hat{t}_p_))}{[f(\hat{t}_p)]^2}
+Var(\hat{t}_p)=\frac{\hat{Var}(\hat{S}(\hat{t}_p))}{[f(\hat{t}_p)]^2}
 $$
 
 Desejamos estimar:

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<title>Introdução</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/styles/github.min.css">
+<script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" async></script>
+
+<!-- MathJax scripts -->
+<script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
+
+<style type="text/css">
+body, td {
+  font-family: sans-serif;
+  background-color: white;
+  font-size: 13px;
+}
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+tt, code, pre {
+  font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+a:visited { color: #80007f; }
+pre, img { max-width: 100%; }
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+code[class] { background-color: #F8F8F8; }
+code.language-undefined { background-color: inherit; }
+table {
+  margin: auto;
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #666;
+}
+table thead th { border-bottom: 1px solid #ddd; }
+th, td { padding: 5px; }
+thead, tfoot, tr:nth-child(even) { background: #eee; }
+blockquote {
+  color:#666;
+  margin:0;
+  padding-left: 1em;
+  border-left: 0.5em #eee solid;
+}
+hr { border: 1px #ddd dashed; }
+.frontmatter { text-align: center; }
+
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    filter:none !important;
+  }
+  body {
+    font-size: 12pt;
+    max-width: 100%;
+  }
+  a, a:visited { text-decoration: underline; }
+  hr {
+    visibility: hidden;
+    page-break-before: always;
+  }
+  pre, blockquote {
+    padding-right: 1em;
+    page-break-inside: avoid;
+  }
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page :left { margin: 15mm 20mm 15mm 10mm; }
+  @page :right { margin: 15mm 10mm 15mm 20mm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}
+</style>
+
+
+</head>
+
+<body>
+<div class="include-before">
+
+</div>
+
+<div class="frontmatter">
+<div class="title"><h1>Introdução</h1></div>
+<div class="author"><h2>Caio Gomes Alves</h2></div>
+<div class="date"><h3>2023-03-29</h3></div>
+</div>
+
+<div class="body">
+<h1>Introdução</h1>
+<p>Seja \(y = \text{tempo até o evento de interesse}\), chamamos esse tempo \(y\) de <strong>tempo de falha</strong>. A resposta para esses eventos é intrinsicamente longitudinal, sendo obtidas pot estudos observacionais e experimentais, de forma retrospectiva ou prospectiva.</p>
+<p>Exemplos de estudos observacionais são:</p>
+<ul>
+<li>Estudos descritivos;</li>
+<li>Estudos caso-controle;</li>
+<li>Estudos de coorte.</li>
+</ul>
+<p>Exemplos de estudos experimentais são principalmente:</p>
+<ul>
+<li>Estudos clínicos.</li>
+</ul>
+<p>Num estudo de coorte, os grupos exposto e não-exposto ao fator de interesse são acompanhados no tempo, registrando-se a ocorrência do evento de interesse. Por exemplo, dois indivíduos são expostos ao cigarro (usuário x não-usuário), e são acompanhados até a ocorrência de câncer.</p>
+<p>Denominações usuais para estudos de coorte são:</p>
+<ul>
+<li>Estudos longitudinais ou de seguimento (ênfase no acompanhamento ao longo do tempo);</li>
+<li>Estudos prospectivos (ênfase na direção do acompanhamento);</li>
+<li>Estudos de incidência (atentando para a proporção de novos casos no período de seguimento).</li>
+</ul>
+<p>Em relação à forma de coleta das informações, podemos classificá-las em:</p>
+<ul>
+<li>Coorte <em>contemporânea</em> ou <em>prospectiva</em>: indivíduos escolhidos no presente e desfecho registrado em acompanhamento futuro;</li>
+</ul>
+<p>Um estudo <em>clínico aleatorizado</em> é considerado o padrão-ouro para testar a eficácia de uma intervenção. É um estudo prospectivo no qual exite a intervenção direta do pesquisador que aloca, de forma aleatória, o tratamento ao paciente.</p>
+<p>Tipos de censura:</p>
+<ul>
+<li>Censura do tipo I: Ocorre em estudos em que, ao serem finalizados após um tempo pré-estabelicido, alguns indivíduos ainda não apresentaram o evento de interesse;</li>
+<li>Censura do tipo II: ocorre em estudos que são encerrados após a observação de um número pré-estabelicido de falhas;</li>
+<li>Censura aleatória: ocorre com frequência na área médica. Neste caso, o indivíduo saí do estudo sem a ocorrência do evento de interesse.</li>
+</ul>
+<p>Seja \(T\) uma v.a. que representa o tempo de falha e \(C\) uma outra v.a. independente de \(T\) que representa o tempo de censura. O que se observa é:</p>
+<p>$$
+t = min(T,C)
+$$</p>
+<p>e:</p>
+<p>$$
+\delta = 1, \text{se} T \le C
+$$</p>
+<p>$$
+\delta = 0, \text{se} T &gt; C.
+$$</p>
+<p>Ou seja:</p>
+<p>$$
+\delta_i = I(T_i \le C_i)
+$$</p>
+<p>$$
+T \sim f_T(t|\theta_T)
+$$</p>
+<p>$$
+C \sim f_C(c|\theta_C)
+$$</p>
+<p>Suponha que os pares \((T_i,C_i), i = 1,2,\ldots,n\) formam uma amostra aleatória de \(n\) indivíduos. Quando \(C_1 = C\), uma constante fixada, obtém-se a censura do tipo I.</p>
+<p>A função taxa de falha permite descrever a taxa de falha instantânea no tempo \(t\) condicional à sobrevivência até o tempo \(t\). É definida como:</p>
+<p>$$
+\lambda(t)=\lim_{\Delta t \to 0}\frac{P(t \le T &lt; t+\Delta t|T \ge t)}{\Delta t}
+$$</p>
+<p>A função de taxa de falha acumulada fornece a taxa de falha acumulada do indivíduo, sendo definida como:</p>
+<p>$$
+\Lambda(u) = \int_{0}^{t}\lambda(u)du
+$$</p>
+<p>O tempo de vida médio é dado por:</p>
+<p>$$
+t_m = \mathbb{E}(T)=\int_{0}^{\infty} S(t)dt
+$$</p>
+<p>A vida média residual mede, para indivíduos com tempo \(t\), o tempo médio restante de vida e é dada por:</p>
+<p>$$
+vmr(t) = \frac{\int_{t}^{\infty}S(u)du}{S(t)}
+$$</p>
+<p>Em que \(f(\cdot)\) é a densidade de \(T\). Note que \(vmr(0) = t_m\)</p>
+<p>Temos as seguintes relações:</p>
+<p>$$
+\lambda(t) = \frac{f(t)}{S(t)}=-\frac{\delta}{\delta t}(\log S(t))
+$$</p>
+<p>$$
+\Lambda(t)=\int_0^t \lambda(u)du = -log(S(t))
+$$</p>
+<p>$$
+S(t)=\exp{{-\Lambda(t)}}=\exp{{-\int_0^t \lambda(u)du}}
+$$</p>
+<p>$$
+S(t)=\frac{vmr(0)}{vmr(t)}\exp{{-\int_0^t \frac{du}{vmr(u)}}}
+$$</p>
+<p>$$
+\lambda(t)=(\frac{\delta vmr(t)}{\delta t}+1)/vmr(t)
+$$</p>
+<h2>Estimador de Kaplan-Meier</h2>
+<p>O estimador de Kaplan-Meier é uma adaptação da função de sobrevivência empírica que, na ausência de censuras, é definida como:</p>
+<p>$$
+\hat{S}(t)=\frac{\text{nº de observações que não falharam até o tempo}t}{\text{nº de observações no estudo}}
+$$</p>
+<ul>
+<li>\(\hat{S}(t)\) é uma função escada com degraus nos tempos observados de falha de tamanho \(\frac{1}{n}\), em que \(n\) é o tamanho da amostra;</li>
+<li>Se existirem empates no tempo \(t\), o tamanho do degrau fica multiplicado pelo número de empates;</li>
+<li>O EKM considera tanto intervalos de tempo quantos forem o número de falhas distrintas.</li>
+</ul>
+<p>Construção do EKM em dados que envolvem censuras:</p>
+<ul>
+<li>Ordenar os tempos distintos de falha: \(t_1 &lt; t_2&lt; \ldots &lt; t_k\);</li>
+<li>Obter \(d_j\): número de falhas no tempo \(t_j\);</li>
+<li>Obter \(n_j\): número de observações sob risco (não falhou e não foi censurado) até o tempo \(t_j\) (exclusive);</li>
+<li>Obter \(q_j = \frac{d_j}{n_j}\);</li>
+<li>a sobrevivência em \(t_j\) é estimada por:
+$$
+\hat{S}(t) = (1-q_{1})(1-q_{2})\cdots(1-q_j) = \prod_{i \le j}(1-\frac{d_i}{n_i})
+$$</li>
+</ul>
+<p>O EKM é então definido por:</p>
+<p>$$
+\hat{S}(t)\hat{S}(t)=\prod_{j:t_j &lt; t}(\frac{n_j-d_j}{n_j})=\prod_{j:t_j &lt; t}(1 - \frac{d_j}{n_j})
+$$</p>
+<p>Principais propriedades:</p>
+<ul>
+<li>É não-viciado para amostras grandes;</li>
+<li>É fracamente consistente;</li>
+<li>Converge assintoticamente para um processo Gaussiano;</li>
+<li>É estimador de máxima verossimilhança de \(S(t)\).</li>
+</ul>
+<p>A variância assintótica do EKM é estimada pela fórmula de Greenwood:</p>
+<p>$$
+\hat{Var}(\hat{S}(t))=\hat{S}(t)^2 \sum_{j:t_j&lt;t}(\frac{d_j}{n_j(n_j-d_j)})
+$$</p>
+<p>Como \(\hat{S}(t)\), para \(t\) fixo, tem distribuição assintótica Normal, segue que um intervalo de confiança aproximado para \(S(t)\) é dado por:</p>
+<p>$$
+\hat{S}(t) \pm z_{\alpha / 2}\sqrt{\hat{Var}(\hat{S}(t))}
+$$</p>
+<p>Existem correções para valores extremos de \(t\), em que o intervalo acima pode apresentar valores menores que zero e maiores que 1. Uma solução é considerar alguma transformação para \(S(t)\), por exemplo, para \(\hat{U}(t)=\log{[-\log{\hat{S}(t)}]}\), temos:</p>
+<p>$$
+\hat{Var}(\hat{U}(t)) = \frac{\sum_{j:t_j&lt;t}\frac{d_j}{n_j(n_j-d_j)}}{[\sum_{j:t_j&lt;t}\log{(\frac{n_j-n_d}{n_j})}]^2}
+$$</p>
+<p>E o intervalo de confiança será dado por:</p>
+<p>$$
+[\hat{S}(t)]^{\exp{{\pm z_{\alpha/2}\sqrt{\hat{Var}(\hat{U}(t))}}}}
+$$</p>
+<p>O estimador de Nelson-Aalen se baseia na função de sobrevivência:</p>
+<p>$$
+S(t)=\exp{{\Lambda(t)}}
+$$</p>
+<p>Um estimador para \(\Lambda(t)\) é:</p>
+<p>$$
+\tilde{\Lambda}(t) = \sum_{j:t_k&lt;t}(\frac{d_j}{n_j})
+$$</p>
+<p>O estimador de Nelson-Aalen para \(S(t)\) é dado por:</p>
+<p>$$
+\tilde{S}(t)=\exp{{-\tilde{\Lambda}(t)}}
+$$</p>
+<p>Com variância assintótica estimada:</p>
+<p>$$
+\hat{Var}(\tilde{\Lambda}(t))=[\tilde{S}(t)]^{2} \sum_{j:t_k&lt;t}(\frac{d_j}{n_j^{2}})
+$$</p>
+<h2>No R: Dados de Hepatite:</h2>
+<pre><code class="language-r"># Pacotes utilizados:
+library(survival)
+library(survminer)
+
+# Dados dos tempos de falha:
+tempos &lt;- c(1,2,3,3,3,5,5,16,16,16,16,16,16,16,16,1,1,1,1,4,5,7,8,10,10,12,16,16,16)
+
+# Indicadora de censura:
+cens &lt;- c(0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,1,1,1,0,0,0,0,0)
+
+# Divisão dos grupos:
+grupos &lt;- as.factor(c(rep(&quot;Controle&quot;, 15),rep(&quot;Esteroide&quot;, 14)))
+
+# Dados completos:
+dados &lt;- data.frame(tempos, cens, grupos)
+
+# Gráfico da curva de sobrevivência:
+ekm &lt;- survfit(Surv(tempos, cens) ~ grupos, data = dados)
+ggsurvplot(ekm)
+</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAIAAAApSmgoAAAACXBIWXMAAAsSAAALEgHS3X78AAAgAElEQVR4nO3deVxU9eL/8c8ww+YwsggiZppodkUlDRdETTMVTQkJyiWzR5pp3TYzl+9Xs717q+tCXetbVlcqS6+YYi653ChDRFwgl4JUDMUFchQYlGW23x9z40cwjCSHGfj4ev7h48znnPOZ95yHvj0cZs6orFarAADIy83VAQAATYuiBwDJUfQAIDmKHgAkR9EDgOQoegCQHEUPAJKj6AFAchQ9AEiOogcAyVH0ACA5ih4AJEfRA4DkKHoAkBxFDwCSo+gBQHIUvZzee++9v/zlL717946Ojj5z5owQ4vLly1u2bHGwyzU3uCbzwUzz/ozGzNCk8vLyxo4d27Nnz9tuu+2tt95q4F4NOSzr169/4YUXri9V0oWiT84XXt++Te3s2bNeXl69fhcVFVV3m+v7a7N27drXX3+95kivXr2uPyiuhaKXUG5u7ltvvXXw4MHs7OxHH300Pj5eCFFUVLRq1aqam5nN5poP627wpxlKhaG0UTPUSaUUi8Vy//33P/3000ePHj148ODWrVt37NjRkB2vedwa6UJV1fkqYyMnaaKDJoS49dZbj/wuPT297gYN+WtTN9599933/PPPKxUS16RxdQAor7i4OCgoyN3dXQhha3khxMsvv5yenv7ZZ5+1bt16586dmZmZK1asePPNN0+ePOnj4/P222+/8847tg3i4+OnTp1aPR4ZGWn3WcyZ6eLq1ZojlrwTwmoV3+36w3Zubuo7h9fd3WQyzZgx46effurRo0dubu68efNsqUaMGOHr6zt//nyz2dy3b9+srKw333xz//79ubm5Qoi333579OjRJpPpiSeeOHTokEajWbFiRURExNmzZ5966qnz58936tRp9erVarW61tPt2LGja9eu0dHRQggfH58lS5aUlJTUnSclJeWzzz4rKioqLS39n//5nwkTJtQ9bitXrlyxYkXNvWxPYbVan3vuuZ07d+p0uuXLlw8YMKDuq/7m0uUfy67UHPm+uMRsVWlUBbW2fCi4bXtPD9ceNLtq7VV9fKZMmVLr5aekpNR3xL766qsTJ048++yzDz/8cH5+frdu3SorKxt4DHEdKHoJ9evXr2vXrp07d46Pj4+Jibn//vuFEC+++OKi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2QUA0HiOil6r1Wq12rKysqysrP3795eUlNhG7G6cmprq5+cXFxfn7e09d+7cpKSkmmsrKiqKi4tDQ0NtM3h5eV1zFwCAIhwVvcFgmDBhQvv27UeMGHHPPfd06NAhPj6+tLTU7sb5+flhYWG25bCwsPz8/Jprf/31V41G07dvX39//5EjR+bl5V1zFwCAIhwV/ZNPPvnTTz+lp6eXl5dfvXo1MzPzxIkTTz75pN2N9Xq97QO0QgidTldZWWkwGKrXlpaWRkVFrV27tqioKCwsbOLEiY53eeeddx544IHFixebTM3xrcoA0II4etfNli1bNm3aNGDAf98v3Ldv3w8//HDs2LF2N/b396++fG8wGDQajY+PT/Xa/v37b9myxbY8Z86cTp06Xbp0ycEunTt3Li8v//XXXw8dOtSIVwcAcHhGL4TQaDS1Hvr7+9vdMjQ01PYBWiFETk5O586dbR8Tt8nIyEhLS7Mtu7u7q9VqT09PB7vExMTMnz//wQcf5IO4ANBIjop+1qxZjz322IEDB6xWq9VqPXDgwIwZM+bPn29342HDhhUVFaWmpprN5sTExOrvEE9PTy8uLr5w4UJ8fHxOTo7FYlm+fPnIkSO1Wm19uwAAlGStX48ePWyn2J6enh4eHrbtA39333331dr+wIEDffr06dix47Rp0yorK22DXl5e33zzjdVqTUxM7Nq1a9u2bePj4y9cuOBgl2o//PBDQECAg4QAauq276BITdumv+TqIGheVFartb7/A77//nsH/0P4+/uHh4cr+79OLWlpabGxsXq9vkmfBZCG7V4328LDRgfYv8SKG5OjX8bW/ZZwAECLc41fxgIAWjqKHgAkR9EDgOTsXKO/5q0IOnXq1DRhAADKs1P0t9xyi+N9HLxRBwDQ3Ngp+uLiYufnAAA0ETtF7+vr62CHxMTEZ555psnyAAAU5uh99KWlpcuXLz9z5kz1yMWLF9PS0ih6AGhBHL3rZsaMGR9++KHRaFy1apVarbZardu3b1+1apWzsgEAFODojH7nzp3r16+/6667zpw588ADDwwfPjwyMnL79u313akYANAMOTqjN5vNgYGBQojw8PBjx44JIeLi4tavX++kaAAAJTgq+j59+rz99tt6vb53794bN240Go1ZWVmVlZVOCwcAaDxHRb9kyZJdu3atWbMmPj7+/Pnz7du3Hz16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" alt="plot of chunk unnamed-chunk-1" /></p>
+<pre><code class="language-r"># Sumários:
+summary(ekm0 &lt;- survfit(Surv(tempos, cens) ~ grupos, conf.type = &quot;plain&quot;,data = dados))
+</code></pre>
+<pre><code>## Call: survfit(formula = Surv(tempos, cens) ~ grupos, data = dados, 
+##     conf.type = &quot;plain&quot;)
+## 
+##                 grupos=Controle 
+##         time       n.risk      n.event     survival      std.err lower 95% CI 
+##        3.000       13.000        2.000        0.846        0.100        0.650 
+## upper 95% CI 
+##        1.000 
+## 
+##                 grupos=Esteroide 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##     1     14       3    0.786   0.110        0.571        1.000
+##     5      9       1    0.698   0.128        0.448        0.948
+##     7      8       1    0.611   0.138        0.340        0.882
+##     8      7       1    0.524   0.143        0.243        0.805
+##    10      6       1    0.437   0.144        0.155        0.718
+</code></pre>
+<pre><code class="language-r">sob.NA &lt;- survfit(coxph(Surv(tempos, cens) ~ grupos,data = subset(dados, grupos == &quot;Esteroide&quot;),method = &quot;breslow&quot;))
+summary(sob.NA)
+</code></pre>
+<pre><code>## Call: survfit(formula = coxph(Surv(tempos, cens) ~ grupos, data = subset(dados, 
+##     grupos == &quot;Esteroide&quot;), method = &quot;breslow&quot;))
+## 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##     1     14       3    0.807  0.0999        0.633        1.000
+##     5      9       1    0.722  0.1201        0.521        1.000
+##     7      8       1    0.637  0.1326        0.424        0.958
+##     8      7       1    0.553  0.1394        0.337        0.906
+##    10      6       1    0.468  0.1414        0.259        0.846
+</code></pre>
+<h2>Estimação de Quantidades de Interesse:</h2>
+<ul>
+<li>
+<p>Probabilidade de sobrevivência</p>
+<ul>
+<li>Estimador de Kaplan-Meier ou de Nelson-Aalen;</li>
+<li>Interpolação pode ser útil;</li>
+<li>Variância estimada pela fórmula de Greenwood. Transformações podem ser úteis.</li>
+</ul>
+</li>
+<li>
+<p>Percentis</p>
+<ul>
+<li>Utilizar a inversa do estimador de Kaplan-Meier ou de Nelson-Aalen;</li>
+<li>Interpolação pode ser útil;</li>
+<li>Variância difícil de ser estimada.</li>
+</ul>
+</li>
+</ul>
+<p>A variância do estimador de percentis ($\hat{t}_p$) é dada por:</p>
+<p>$$
+Var(\hat{t}_p)=\frac{\hat{Var}(\hat{S}(\hat{t}_p))}{[f(\hat{t}_p)]^2}
+$$</p>
+<p>Desejamos estimar:</p>
+<p>$$
+t_m = \mathbb{E}(T) = \int_0^{\infty}S(t)dt
+$$</p>
+<p>Uma estimativa paratmé substituir \(S(t)\) por \(\hat{S}(t)\). A integral se transformaem uma soma de áreas de retângulos, isto é:</p>
+<p>$$
+\hat{t}<em>m=t_1 + \sum</em>{i = 1}^{k-1}\hat{S}(t_j)(t_{j+1}-t_j)
+$$</p>
+<p>Em que \(t_1&lt;t_2&lt;\cdots&lt;t_k\) são os \(k\) tempos de falha distintos e ordenados.</p>
+
+</div>
+
+<div class="include-after">
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/combine/npm/@xiee/utils/js/center-img.min.js" async></script>
+<script>
+
+</script>
+</body>
+
+</html>
